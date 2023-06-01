@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+      
+  </head>
+  <style>
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+ 
+}
+
+.text-box {
+  width: 90%;
+  height: 40%;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #f5f5f5;
+}
+
+ul.saveBar{
+      list-style: none; 
+      padding: 0;
+      margin: 0;
+      display: flex;
+      font-family: monospace;
+    }
+    
+ul.saveBar li{
+      display: inline-block;
+      border: 0px solid;
+      position: relative;
+      flex-grow: 1;
+      margin: 10px;
+
+}
+.file-label {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.file-label:hover {
+  background-color: #0056b3;
+}
+#dontDisplay{
+  visibility: hidden;
+}
+
+  </style>
+  <script>
+
+    var recipesData = <%- recipes.replace(/&#34;/g, '\\"') %>;
+    
+    
+    const username =  '<%- username %>';
+                      
+    var slideIndex = 0;
+    var maxNumberOfDisplayedRows = 7;
+
+
+    
+
+    function setFirstBox(){
+      var showButtons = document.getElementById("buttonsForLastPage");
+      showButtons.style.display = "none";
+
+      var showIngredients = null;
+    
+      var recipe = recipesData[slideIndex];
+
+      if (typeof recipe === "undefined") {
+        showOtherOptions()
+        return;
+      }
+
+
+      var all_products = [];
+      var all_units = [];
+      var all_amounts = [];
+
+      for (i of JSON.parse(recipe.przepis_json).product_table){
+      var inside = false; 
+
+      var product = i.product;
+      var productWeight = i.amount;
+      var unit = i.unit;
+      if(unit == "dag"){
+        productWeight *= 10;
+        unit = "g";
+      }
+      else if(unit == "kg" || unit == "l"){
+        productWeight *= 1000;
+        
+        if(unit == "kg"){
+          unit = "g";
+        }
+        else{
+          unit = "ml";
+        }
+      }
+      var iterator = 0;
+      for(i of all_products){
+
+        if(i == product){
+          inside = true;
+          all_amounts[iterator] = String(parseInt(productWeight) + parseInt(all_amounts[iterator]));
+          break;
+        }
+        iterator += 1;
+      }
+
+      if(inside == false){
+        all_amounts.push(productWeight);
+        all_products.push(product);
+        all_units.push(unit);
+      }
+     
+      
+      
+    }
+
+    for(let i = 0 ;i < all_products.length; i++){
+      // console.log(product, productWeight)
+      
+      if(showIngredients !== null){
+          showIngredients = showIngredients + all_products[i] +" "+ all_amounts[i] +" "+ all_units[i] + "<br>";
+      }
+      else{
+          showIngredients =  all_products[i] +" "+ all_amounts[i] +" "+ all_units[i] +"<br>";
+      }
+    }
+
+      
+
+      var boxElement = document.getElementById("box_1");
+      boxElement.textContent = "";
+      boxElement.insertAdjacentHTML("beforeend",showIngredients);
+    }
+    
+
+    function setSecondBox(){
+      
+      var showDescription = null;
+      
+      
+      var recipe = recipesData[slideIndex];
+      if (typeof recipe === "undefined") {
+        return;
+      }
+
+      var rowNumber = 0;
+      for (i of JSON.parse(recipe.przepis_json).description_table){
+    
+      
+      var desc = i.description;
+      
+    
+      
+      if(showDescription !== null){
+        showDescription = showDescription + desc + "<br>";
+       
+      }
+      else{
+        
+        showDescription =  desc +"<br>";
+        
+      }
+      rowNumber += 1;
+      if(rowNumber == maxNumberOfDisplayedRows){
+        showDescription =  showDescription + "...<br>";
+        break;
+      }
+    }
+
+      var boxElement = document.getElementById("box_2");
+      boxElement.textContent = "";
+      boxElement.insertAdjacentHTML("beforeend",showDescription);
+    }
+
+    function nextSlide(){
+      var showButtons = document.getElementById("buttonsForLastPage");
+      showButtons.style.display = "none";
+      
+      if(slideIndex < recipesData.length){ 
+      slideIndex += 1;
+      
+      if(slideIndex == recipesData.length){
+        showOtherOptions();
+      }
+      else{
+          setFirstBox();
+          setSecondBox();
+      }
+      }
+      
+    }
+
+    function prevSlide(){
+      
+      if (recipesData.length === 0) {
+        return;
+      }
+
+      var showButtons = document.getElementById("buttonsForLastPage");
+      showButtons.style.display = "none";
+      
+      if(slideIndex > 0){
+        slideIndex -= 1
+        setFirstBox();
+        setSecondBox();
+        comeBackToSlides();
+      }
+    }
+
+    function comeBackToSlides(){
+      var box1Element = document.getElementById("box_1");
+      var box2Element = document.getElementById("box_2");
+      var box3Element = document.getElementById("Next");
+      var box4Element = document.getElementById("Select");
+      var box5Element = document.getElementById("Delete");
+      var box6Element = document.getElementById("Edit");
+      var box7Element = document.getElementById("Export");
+      var showButtons = document.getElementById("buttonsForLastPage");
+
+
+      box1Element.style.display = "block"; 
+      box2Element.style.display = "block"; 
+      box3Element.style.display = "block";
+      box4Element.style.display = "block";
+      box5Element.style.display = "block";
+      box6Element.style.display = "block";
+      box7Element.style.display = "block";
+      showButtons.style.display = "none";
+    }
+
+    function showOtherOptions(){
+  
+      var box1Element = document.getElementById("box_1");
+      var box2Element = document.getElementById("box_2");
+      var box3Element = document.getElementById("Next");
+      var box4Element = document.getElementById("Select");
+      var box5Element = document.getElementById("Delete");
+      var box6Element = document.getElementById("Edit");
+      var box7Element = document.getElementById("Export");
+
+      var showButtons = document.getElementById("buttonsForLastPage");
+      
+      box1Element.style.display = "none";
+      box2Element.style.display = "none";
+      box3Element.style.display = "none";
+      box4Element.style.display = "none";
+      box5Element.style.display = "none";
+      box6Element.style.display = "none";
+      box7Element.style.display = "none";
+
+      showButtons.style.display = "block";
+    }
+
+    function createRecipe(){
+      
+      window.location.href = "/addDishList?username=" + encodeURIComponent(username);
+      
+    }
+    function deleteCurrentDish(){
+      var  forProcessing = recipesData[slideIndex];
+      var idToDelete = forProcessing.id;
+      console.log(idToDelete);
+
+
+      fetch('/DeletetDish', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({idToDelete})
+    })
+    .then(response => {
+      if (response.ok) {
+        location.reload();
+      } else {
+        location.reload();
+      }
+    })
+    .catch(error => {
+      // Handle network or fetch error
+    });
+    }
+
+
+    function selectCurrentDish(){
+      var  forProcessing = recipesData[slideIndex];
+      var idToCheck = forProcessing.id;
+      
+      window.location.href = `/selectRecipe?username=${encodeURIComponent(username)}&idToCheck=${encodeURIComponent(idToCheck)}`;
+    }
+
+
+    function exportCurrentDish(){
+      var  forProcessing = recipesData[slideIndex];
+      delete forProcessing.id;
+      delete forProcessing.user;
+
+
+      var asd = JSON.stringify(forProcessing);
+
+      // Create a Blob object with the text content
+      var blob = new Blob([asd], { type: "text/plain" });
+
+      // Create a temporary <a> element
+      var link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "data.txt"; // Set the desired filename
+
+      // Programmatically trigger the download
+      document.body.appendChild(link);
+      link.click();
+
+      // Clean up the temporary element
+      document.body.removeChild(link);
+    }
+
+    function editCurrentDish(){
+      var  forProcessing = recipesData[slideIndex];
+      var idToCheck = forProcessing.id;
+      
+      window.location.href = `/addDishList?username=${encodeURIComponent(username)}&idToCheck=${encodeURIComponent(idToCheck)}`;
+    }
+
+    
+  </script>
+  <body>
+    <div class="container">
+      <div class="text-box", id="box_1">
+        <p>This is the text inside the box.</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="text-box", id="box_2">
+        <p>This is the text inside the box.</p>
+      </div>
+    </div>
+    
+    <ul class="buttonsForLastPage", id="buttonsForLastPage">
+      
+    <li><label for="importFile" class="file-label">
+        <input type="file" id='ImprotFile' accept=".txt">
+      </input></label>
+    </li>
+
+      <li><button id="CreateRecipe" onclick="createRecipe()">Create Recipe</button></li> 
+    </ul>
+
+    <ul class="saveBar">
+      <li><button id="Prev" onclick="prevSlide()">Prev</button></li>
+      <li><button id="Delete" onclick="deleteCurrentDish()">Delete</button></li>
+      <li><button id="Select" onclick="selectCurrentDish()">Select</button></li>
+      <li><button id="Export" onclick="exportCurrentDish()">Export</button></li>
+      <li><button id="Edit" onclick="editCurrentDish()">Edit</button></li> 
+      <li><button id="Next" onclick="nextSlide()">Next</button></li>
+    </ul>
+
+    
+    <label name="username" id = "dontDisplay"><%- username %></label>
+   
+  </body>
+  <script>
+
+
+    const txtFileInput = document.getElementById('ImprotFile');
+      
+      txtFileInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          
+          reader.onload = function(event) {
+            const content = event.target.result;
+            sendData(content);
+          
+          };
+
+          reader.readAsText(file);
+        }
+      });
+
+    function sendData(jsonToSend){
+      var replacedData = jsonToSend.replace(/\\/g, '');
+      replacedData = replacedData.substring(replacedData.indexOf('{', replacedData.indexOf(':')));
+      replacedData = replacedData.slice(0, -2);
+      console.log(replacedData);
+      fetch('/ImportDish', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ replacedData, username })
+    })
+    .then(response => {
+      if (response.ok) {
+        location.reload();
+      } else {
+        location.reload();
+      }
+    })
+    .catch(error => {
+      // Handle network or fetch error
+    });
+  }
+
+    setFirstBox();
+    setSecondBox();
+    </script>
+</html>
