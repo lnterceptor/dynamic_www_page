@@ -1,19 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AdminLoginPage</title>
-   
-</head>
-<body>
-  <form action = "/adminPost", method="POST">
-  
-    <input type="text" id="login", name="login"  placeholder="Login">
-    <input type="password" id="password", name="password" placeholder="Password">
-    <button id="dontCare">Submit</button>
-  
-  </form>
-</body>
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="container col-md-6">
+      <div class="form-outline mb-4">
+        <form action="/adminPost" , method="POST">
+          <input
+            class="form-control"
+            type="text"
+            id="login"
+            ,
+            name="login"
+            placeholder="Login"
+          />
+        </form>
+      </div>
+      <div class="form-outline mb-4">
+        <form action="/adminPost" , method="POST">
+          <input
+            class="form-control"
+            type="password"
+            id="password"
+            ,
+            name="password"
+            placeholder="Password"
+          />
+        </form>
+      </div>
+
+      <button class="btn btn-primary mb-4" id="dontCare">Submit</button>
+    </div>
+  </body>
 </html>
