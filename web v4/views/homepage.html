@@ -15,16 +15,17 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  background-color: #f5f5f5;
   margin-top: 100px;
+  padding: 100px;
  
 }
 
-.text-box {
-  width: 90%;
-  height: 40%;
-  border: 1px solid #ccc;
+.text-box { 
+  margin: 50px;
   padding: 10px;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
+  border-radius: 10%;
 }
 
 ul.saveBar{
@@ -36,11 +37,11 @@ ul.saveBar{
     }
     
 ul.saveBar li{
-      display: inline-block;
+     
       border: 0px solid;
-      position: relative;
+     
       flex-grow: 1;
-      margin: 10px;
+    
 
 }
 .file-label {
@@ -342,18 +343,26 @@ ul.saveBar li{
     
   </script>
   <body>
-    <div class="container">
-      <div class="text-box col-md-6", id="box_1">
-        <h2>Ingredients</h2>
-        <p>This is the text inside the b.</p>
-      </div>
-    </div>
 
-    <div class="container">
-      <div class="text-box col-md-6", id="box_2">
-        <h2>Process</h2>
-        <p>This is the text inside the box.</p>
+    <div class="container  col-md-8">
+      <div class = "row" >
+        <div class="text-box col-md-12 ", id="box_1">
+          <h2>Ingredients</h2>
+          <p class ="gray-text">This is the text inside the b.</p>
+        </div>
+      
+        <div class="text-box col-md-12 ", id="box_2">
+          <h2>Process</h2>
+          <p>T Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
+            venenatis lectus eu mauris fermentum pulvinar. Suspendisse
+            scelerisque consequat lacinia. In fringilla nulla a lacus
+            consectetur, at placerat ipsum mollis. Suspendisse commodo lacus
+            eget tortor fringilla euismod. Suspendisse potenti. Fusce efficitur
+            dapibus est, eu dapibus est semper id. Nam rutrum dapibus sem, eu
+            blandit nulla aliquet at.</p>
+        </div>
       </div>
+      
     </div>
     
     <ul class="buttonsForLastPage", id="buttonsForLastPage">
@@ -366,14 +375,18 @@ ul.saveBar li{
       <li><button id="CreateRecipe" onclick="createRecipe()">Create Recipe</button></li> 
     </ul>
 
-    <ul class="saveBar">
-      <li><button id="Prev" onclick="prevSlide()">Prev</button></li>
-      <li><button id="Delete" onclick="deleteCurrentDish()">Delete</button></li>
-      <li><button id="Select" onclick="selectCurrentDish()">Select</button></li>
-      <li><button id="Export" onclick="exportCurrentDish()">Export</button></li>
-      <li><button id="Edit" onclick="editCurrentDish()">Edit</button></li> 
-      <li><button id="Next" onclick="nextSlide()">Next</button></li>
-    </ul>
+    <div class="row">
+      <div class="saveBar col-md-12 text-center mt-5">
+        <button type="button" id="Prev" class="btn btn-dark mx-2" onclick="prevSlide()">Prev</button>
+        <button type="button" id="Delete"class="btn btn-dark mx-2 " onclick="deleteCurrentDish()">Delete</button</li>
+        <button type="button" id="Select"class="btn btn-dark mx-2" onclick="selectCurrentDish()">Select</button>
+        <button type="button" id="Export"class="btn btn-dark mx-2" onclick="exportCurrentDish()">Export</button>
+        <button type="button" id="Edit" class="btn btn-dark mx-2" onclick="editCurrentDish()">Edit</button> 
+        <button type="button" id="Next" class="btn btn-dark mx-2" onclick="nextSlide()">Next</button>
+      <div>
+
+    </div>
+   
 
     
     <label name="username" id = "dontDisplay"><%- username %></label>
