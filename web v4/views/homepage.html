@@ -5,13 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HomePage</title>
-      
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+  />
   </head>
   <style>
 .container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  margin-top: 100px;
  
 }
 
@@ -58,7 +62,7 @@ ul.saveBar li{
   </style>
   <script>
 
-    var recipesData = <%- recipes.replace(/&#34;/g, '\\"') %>;
+   // var recipesData = <%- recipes.replace(/&#34;/g, '\\"') %>;
     
     
     const username =  '<%- username %>';
@@ -339,13 +343,15 @@ ul.saveBar li{
   </script>
   <body>
     <div class="container">
-      <div class="text-box", id="box_1">
-        <p>This is the text inside the box.</p>
+      <div class="text-box col-md-6", id="box_1">
+        <h2>Ingredients</h2>
+        <p>This is the text inside the b.</p>
       </div>
     </div>
 
     <div class="container">
-      <div class="text-box", id="box_2">
+      <div class="text-box col-md-6", id="box_2">
+        <h2>Process</h2>
         <p>This is the text inside the box.</p>
       </div>
     </div>
