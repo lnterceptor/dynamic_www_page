@@ -63,7 +63,7 @@ ul.saveBar li{
   </style>
   <script>
 
-   // var recipesData = <%- recipes.replace(/&#34;/g, '\\"') %>;
+    var recipesData = <%- recipes.replace(/&#34;/g, '\\"') %>;
     
     
     const username =  '<%- username %>';
@@ -129,7 +129,6 @@ ul.saveBar li{
         all_units.push(unit);
       }
      
-      
       
     }
 
@@ -227,45 +226,44 @@ ul.saveBar li{
     }
 
     function comeBackToSlides(){
-      var box1Element = document.getElementById("box_1");
-      var box2Element = document.getElementById("box_2");
-      var box3Element = document.getElementById("Next");
-      var box4Element = document.getElementById("Select");
-      var box5Element = document.getElementById("Delete");
-      var box6Element = document.getElementById("Edit");
-      var box7Element = document.getElementById("Export");
+      var ingredientsBoxElement = document.getElementById("box_1");
+      var processBoxElement = document.getElementById("box_2");
+      var nextButton = document.getElementById("Next");
+      var selectButton = document.getElementById("Select");
+      var deleteButton = document.getElementById("Delete");
+      var editButton = document.getElementById("Edit");
+      var exportButton = document.getElementById("Export");
       var showButtons = document.getElementById("buttonsForLastPage");
 
 
-      box1Element.style.display = "block"; 
-      box2Element.style.display = "block"; 
-      box3Element.style.display = "block";
-      box4Element.style.display = "block";
-      box5Element.style.display = "block";
-      box6Element.style.display = "block";
-      box7Element.style.display = "block";
+      ingredientsBoxElement.style.display = "block"; 
+      processBoxElement.style.display = "block"; 
+      nextButton.style.display = "inline-block";
+      selectButton.style.display = "inline-block";
+      deleteButton.style.display = "inline-block";
+      editButton.style.display = "inline-block";
+      exportButton.style.display = "inline-block";
       showButtons.style.display = "none";
     }
 
     function showOtherOptions(){
   
-      var box1Element = document.getElementById("box_1");
-      var box2Element = document.getElementById("box_2");
-      var box3Element = document.getElementById("Next");
-      var box4Element = document.getElementById("Select");
-      var box5Element = document.getElementById("Delete");
-      var box6Element = document.getElementById("Edit");
-      var box7Element = document.getElementById("Export");
-
+      var ingredientsBoxElement = document.getElementById("box_1");
+      var processBoxElement = document.getElementById("box_2");
+      var nextButton = document.getElementById("Next");
+      var selectButton = document.getElementById("Select");
+      var deleteButton = document.getElementById("Delete");
+      var editButton = document.getElementById("Edit");
+      var exportButton = document.getElementById("Export");
       var showButtons = document.getElementById("buttonsForLastPage");
       
-      box1Element.style.display = "none";
-      box2Element.style.display = "none";
-      box3Element.style.display = "none";
-      box4Element.style.display = "none";
-      box5Element.style.display = "none";
-      box6Element.style.display = "none";
-      box7Element.style.display = "none";
+      ingredientsBoxElement.style.display = "none";
+      processBoxElement.style.display = "none";
+      nextButton.style.display = "none";
+      selectButton.style.display = "none";
+      deleteButton.style.display = "none";
+      editButton.style.display = "none";
+      exportButton.style.display = "none";
 
       showButtons.style.display = "block";
     }
@@ -373,8 +371,8 @@ ul.saveBar li{
     
     <ul class="buttonsForLastPage", id="buttonsForLastPage">
       
-    <li><label for="importFile" class="file-label">
-        <input type="file" id='ImprotFile' accept=".txt">
+    <li><label for="ImportFile" class="file-label">
+        <input type="file" id='ImportFile' accept=".txt">
       </input></label>
     </li>
 
@@ -401,7 +399,7 @@ ul.saveBar li{
   <script>
 
 
-    const txtFileInput = document.getElementById('ImprotFile');
+    const txtFileInput = document.getElementById('ImportFile');
       
       txtFileInput.addEventListener('change', (event) => {
         const file = event.target.files[0];
