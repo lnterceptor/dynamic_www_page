@@ -227,7 +227,9 @@ ul.saveBar li{
 
     function comeBackToSlides(){
       var ingredientsBoxElement = document.getElementById("box_1");
+      var ingredientsBoxTitleElement = document.getElementById("box_1_title");
       var processBoxElement = document.getElementById("box_2");
+      var processBoxTitleElement = document.getElementById("box_2_title");
       var nextButton = document.getElementById("Next");
       var selectButton = document.getElementById("Select");
       var deleteButton = document.getElementById("Delete");
@@ -236,8 +238,10 @@ ul.saveBar li{
       var showButtons = document.getElementById("buttonsForLastPage");
 
 
-      ingredientsBoxElement.style.display = "block"; 
+      ingredientsBoxElement.style.display = "block";
+      ingredientsBoxTitleElement.style.display ="block";
       processBoxElement.style.display = "block"; 
+      processBoxTitleElement.style.display = "block";
       nextButton.style.display = "inline-block";
       selectButton.style.display = "inline-block";
       deleteButton.style.display = "inline-block";
@@ -249,7 +253,9 @@ ul.saveBar li{
     function showOtherOptions(){
   
       var ingredientsBoxElement = document.getElementById("box_1");
+      var ingredientsBoxTitleElement = document.getElementById("box_1_title");
       var processBoxElement = document.getElementById("box_2");
+      var processBoxTitleElement = document.getElementById("box_2_title");
       var nextButton = document.getElementById("Next");
       var selectButton = document.getElementById("Select");
       var deleteButton = document.getElementById("Delete");
@@ -257,8 +263,11 @@ ul.saveBar li{
       var exportButton = document.getElementById("Export");
       var showButtons = document.getElementById("buttonsForLastPage");
       
+     
       ingredientsBoxElement.style.display = "none";
+      ingredientsBoxTitleElement.style.display ="none";
       processBoxElement.style.display = "none";
+      processBoxTitleElement.style.display = "none";
       nextButton.style.display = "none";
       selectButton.style.display = "none";
       deleteButton.style.display = "none";
@@ -344,7 +353,7 @@ ul.saveBar li{
 
     <div class="container  col-md-8">
       <div class = "row" >
-        <div class="col-md-12">
+        <div class="col-md-12", id ="box_1_title">
           <h2>Ingredients</h2>
           <div class="text-box col-md-12 ", id="box_1">
             
@@ -352,9 +361,9 @@ ul.saveBar li{
           </div>
         </div>
       
-        <div class="col-md-12">
+        <div class="col-md-12" id ="box_2_title">
           <h2>Process</h2>
-          <div class="text-box ", id="box_2">
+          <div class="text-box col-md-12", id="box_2">
             
             <p>T Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
               venenatis lectus eu mauris fermentum pulvinar. Suspendisse
@@ -363,21 +372,30 @@ ul.saveBar li{
               eget tortor fringilla euismod. Suspendisse potenti. Fusce efficitur
               dapibus est, eu dapibus est semper id. Nam rutrum dapibus sem, eu
               blandit nulla aliquet at.</p>
-          </div></div>
+          </div>
+        </div>
         
       </div>
+      <div class = "row" >
+        <div class="buttonsForLastPage col-md-12 ", id="buttonsForLastPage">
+          <div class="col-md-12">
+            <label for="ImportFile" class="file-label">
+              <input type="file" id='ImportFile' accept=".txt">
+            </input></label>
+          </div>
+          <div class="col-md-12">
+            <button id="CreateRecipe" class="btn btn-dark mx-2" onclick="createRecipe()">Create Recipe</button>
+          </div>
+      
+           
+        </div>
+      </div>
+      
       
     </div>
-    
-    <ul class="buttonsForLastPage", id="buttonsForLastPage">
-      
-    <li><label for="ImportFile" class="file-label">
-        <input type="file" id='ImportFile' accept=".txt">
-      </input></label>
-    </li>
+   
 
-      <li><button id="CreateRecipe" onclick="createRecipe()">Create Recipe</button></li> 
-    </ul>
+ 
 
     <div class="row">
       <div class="saveBar col-md-12 text-center mt-5">
