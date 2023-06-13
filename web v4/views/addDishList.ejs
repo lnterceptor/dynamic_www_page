@@ -10,7 +10,7 @@
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     />
     <style>
-      .btn {
+      .big-button {
         font-size: 24px;
         height: 100px;
       }
@@ -23,7 +23,7 @@
       #sortlist li {
         margin: 10px;
         padding: 10px;
-        border: 1px solid #333;
+        background-color: #f5f5f5;
         display: flex;
         justify-content: space-between;
       }
@@ -32,41 +32,10 @@
         font-family: monospace;
       }
       #sortlist li.hint {
-        background-color: AQUA;
+        background-color: rgb(192, 244, 244);
       }
       #sortlist li.active {
-        background-color: #9b111e;
-      }
-
-      ul#sortlist ul.singleBar {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        font-family: monospace;
-      }
-
-      ul#sortlist ul.singleBar li {
-        display: inline-block;
-        border: 0px solid;
-        position: relative;
-        flex-grow: 1;
-      }
-
-      ul.saveBar {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        font-family: monospace;
-      }
-
-      ul.saveBar li {
-        display: inline-block;
-        border: 0px solid;
-        position: relative;
-        flex-grow: 1;
-        margin: 10px;
+        background-color: #9d8d8f;
       }
     </style>
     <script>
@@ -136,7 +105,7 @@
         var select1 = document.createElement('select');
         select1.id = 'activities' + String(idOfStep);
         select1.name = 'activities' + String(idOfStep);
-
+        select1.ariaLabel =".form-select-lg example";
 
         for (let activity of activitiesData) {
           console.log(activity);
@@ -270,7 +239,7 @@
 
         var button = document.createElement('button');
         button.id = 'deleteRowButton' + String(idOfStep);
-        button.className = 'myClass';
+        button.className = 'btn btn-dark mx-2';
         button.textContent = 'delete row';
 
         button.addEventListener('click', function() {
