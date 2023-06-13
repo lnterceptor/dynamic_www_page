@@ -5,29 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AddDishList</title>
-
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
     <style>
-      #addStepButton {
-        display: block;
-        width: 100%;
-        height: 150%;
-        font-size: 18px;
-        font-weight: bold;
-        background-color: grey;
-        color: white;
-        border: none;
-        border-radius: 5px;
-      }
-      #saveRecipe {
-        display: block;
-        width: 100%;
-        height: 150%;
-        font-size: 18px;
-        font-weight: bold;
-        background-color: grey;
-        color: white;
-        border: none;
-        border-radius: 5px;
+      .btn {
+        font-size: 24px;
+        height: 100px;
       }
 
       #sortlist {
@@ -400,16 +385,28 @@
   <body>
     <ul id="sortlist"></ul>
 
-    <ul class="saveBar">
-      <li>
-        <button id="addStepButton" onclick="addPreparedEarlierStep()">
-          Add Step
-        </button>
-      </li>
-      <li>
-        <button id="saveRecipe" onclick="saveRecipe()">Save Recipe</button>
-      </li>
-    </ul>
+    <div class="container">
+      <div class="saveBar row">
+        <div class="col-6">
+          <button
+            id="addStepButton"
+            class="btn btn-block btn-dark big-button mb-3"
+            onclick="addPreparedEarlierStep()"
+          >
+            Add Step
+          </button>
+        </div>
+        <div class="col-6">
+          <button
+            id="saveRecipe"
+            class="btn btn-block btn-dark big-button mb-3"
+            onclick="saveRecipe()"
+          >
+            Save Recipe
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
 
