@@ -12,6 +12,18 @@
   </head>
 
   <style>
+    .bg {
+      background-color: #f5f5f5;
+      padding: 2vh;
+      margin: 1vh;
+    }
+    .text-box {
+      padding: 10px;
+      background-color: #ffffff;
+      border-radius: 10%;
+      padding: 2vh;
+      margin-top: 1vh;
+    }
     .comeBackToHomepage {
       display: inline-block;
       padding: 10px 20px;
@@ -27,32 +39,140 @@
   </style>
 
   <script>
-    var przepis = '<%- przepis.replace(/&#34;/g, '\\"') %>';
-    var username = '<%= username %>';
+       var recipesData = '<%- przepis.replace(/&#34;/g, '\\"') %>';
+       var username = '<%= username %>';
+       var activityIndex = 0;
 
 
 
-    //iterujac po i dostaniesz sie do kolejnych krokow w przepisie, czesc pol (inputy) nie sa obowiazkowe do wpisania, wiec mozesz dostac ""
-    //przepis.product_table[i].product; -- product_table zawiera w sobie w sobie product, product_category, amount oraz unit
-    //przepis.time_table[i].time; -- time i time_unit
-    //przepis.description_table[i].description; -- description
-    //przepis.activity_table[i].activity; -- activity
 
-    function setButton(){
+       //iterujac po i dostaniesz sie do kolejnych krokow w przepisie, czesc pol (inputy) nie sa obowiazkowe do wpisania, wiec mozesz dostac ""
+       //przepis.product_table[i].product; -- product_table zawiera w sobie w sobie product, product_category, amount oraz unit
+       //przepis.time_table[i].time; -- time i time_unit
+       //przepis.description_table[i].description; -- description
+       //przepis.activity_table[i].activity; -- activity
+
+       function prepareStartData(){
+
+         console.log(recipesData);
+         jsonData = JSON.parse(recipesData);
+         console.log(jsonData);
+         console.log("Product Table:");
+
+         var productList = document.getElementById("productList");
+
+
+         jsonData.product_table.forEach((item, index) => {
+           var listItem = document.createElement("li");
+           var itemInformationString = String(item.product) +" "+ String(item.amount) + String(item.unit);
+           listItem.textContent = itemInformationString;
+           productList.appendChild(listItem);
+         });
+
+
+         var descriptionBox = document.getElementById("description_box");
+         jsonData.description_table.forEach((item, index) => {
+         var desc = document.createElement("p");
+         desc.textContent = item.description;
+         descriptionBox.appendChild(desc);
+       });
+
+
+
+
+
+         var activityBox = document.getElementById("activity_box");
+
+         var currentActivity = String(jsonData.activity_table[0].activity);
+         var activityParagraph = document.createElement("p");
+         activityParagraph.textContent = currentActivity;
+         activityBox.appendChild(activityParagraph);
+
+         var imageName = currentActivity +"-icon.png";
+         var imgField = document.getElementById("icon");
+         imgField.src = imageName;
+
+
+       }
+
+
+
+
+       function nextActivityButton(){
+        activityIndex = activityIndex+1;
+
+        if(activityIndex >=parseInt(jsonData.activity_table.length) )
+        {
+          return;
+        }
+         var activityBox = document.getElementById("activity_box");
+
+         const paragraphs = activityBox.getElementsByTagName("p");
+
+
+        while (paragraphs.length > 0) {
+          activityBox.removeChild(paragraphs[0]);
+        }
+
+
+         var currentActivity = String(jsonData.activity_table[activityIndex].activity);
+         console.log(currentActivity);
+         var activityParagraph = document.createElement("p");
+         activityParagraph.textContent = currentActivity;
+         activityBox.appendChild(activityParagraph);
+         var imageName = currentActivity +"-icon.png";
+         var imgField = document.getElementById("icon");
+         imgField.src = imageName;
+
+       }
+       function setBackButton(){
        var button = document.getElementById("comeBackToHomepage");
        button.href = "/HomePage?username=" + encodeURIComponent(username);
     }
   </script>
   <body>
-    <a id="comeBackToHomepage" class="btn btn-dark big-button mb-3"
-      ><img width="24px" height="24px" src="backIcon.png" alt="back icon" />
-      HomePage</a
-    >
+    <div class="container bg col-md-12">
+      <a id="comeBackToHomepage" class="btn btn-dark big-button mb-3">
+        <img width="24px" height="24px" src="backIcon.png" alt="go back" />
+        HomePage
+      </a>
+
+      <div class="row">
+        <div id="description_box" class="text-box col-md-6">
+          <h2>Description</h2>
+        </div>
+
+        <div id="ingredients_box" class="text-box col-md-6">
+          <h2>Ingredients</h2>
+          <ul id="productList"></ul>
+        </div>
+      </div>
+      <div class="row">
+        <div
+          id="activity_box"
+          class="text-box col-md-6 d-flex justify-content-between"
+        >
+          <button class="btn btn-dark mb-3" onclick="nextActivityButton()">
+            Switch activities
+          </button>
+          <h2>Current Activity:</h2>
+        </div>
+        <div id="picture_box" class="col-md-6 justify-content-between">
+          <img
+            id="icon"
+            width="300px"
+            height="300px"
+            src="cooking-icon.png"
+            alt="cooking icon"
+          />
+        </div>
+      </div>
+    </div>
 
     <!-- jesli chcesz w htmlu przepis, to ponizej jest jego wyswietlenie -->
-    <%- przepis.replace(/&#34;/g, '\\"') %>;
   </body>
   <script>
-    setButton();
+    prepareStartData();
+    setBackButton();
   </script>
 </html>
