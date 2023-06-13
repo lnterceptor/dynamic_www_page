@@ -121,7 +121,8 @@ input[type="file"] {
 
         if(i == product){
           inside = true;
-          all_amounts[iterator] = String(parseInt(productWeight) + parseInt(all_amounts[iterator]));
+          var p_amount = parseInt(productWeight) + parseInt(all_amounts[iterator]);
+          all_amounts[iterator] = String(p_amount);
           break;
         }
         iterator += 1;

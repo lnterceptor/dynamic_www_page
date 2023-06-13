@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Individual Steps</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
   </head>
 
   <style>
@@ -40,7 +44,10 @@
     }
   </script>
   <body>
-    <a id="comeBackToHomepage" class="comeBackToHomepage">HomePage</a>
+    <a id="comeBackToHomepage" class="btn btn-dark big-button mb-3"
+      ><img width="24px" height="24px" src="backIcon.png" alt="back icon" />
+      HomePage</a
+    >
 
     <!-- jesli chcesz w htmlu przepis, to ponizej jest jego wyswietlenie -->
     <%- przepis.replace(/&#34;/g, '\\"') %>;
