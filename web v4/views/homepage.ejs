@@ -60,6 +60,9 @@ input[type="file"] {
 #dontDisplay{
   visibility: hidden;
 }
+.hide{
+  visibility: hidden;
+}
 
   </style>
   <script>
@@ -387,7 +390,11 @@ input[type="file"] {
             </input>Import recipe</label>
           </div>
           <div class="col-md-12 btn btn-dark big-button mb-3" onclick="createRecipe()">
-           Create recipe
+
+            <label for="ImportFile" class="file-label">
+              <input type="file" id='dontDisplay' accept=".txt">
+            </input> Create Recipe</label>
+           
           </div>
       
            
